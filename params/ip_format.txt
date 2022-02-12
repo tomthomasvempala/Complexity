@@ -2,4 +2,8 @@ int N nl
 for N
 int X nnl
 endfor
-
+nl
+int P nl
+for P
+int X nnl
+endfor

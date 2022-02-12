@@ -8,9 +8,24 @@ unordered_map<string, int> data;
 
 vector<string> statements;
 
-string inspect(string oneLine,int index);
+string inspect(string oneLine,int &index);
 
-void integer(string &oneLine,int mini=0,int maxi=5)
+int findVal(char c){
+    int t;
+    if (isalpha(c))
+    {
+        string ch ="";
+        ch+= c;
+        t = data[ch];
+    }
+    else
+    {
+        t = c - '0';
+    }
+    return t;
+}
+
+void integer(string &oneLine,int mini=1,int maxi=5)
 {
     int x =mini+ rand() % (maxi-mini);
     cout << x;
@@ -28,24 +43,16 @@ void integer(string &oneLine,int mini=0,int maxi=5)
     }
 }
 
-void forloop(string oneLine,int start)
+int forloop(string oneLine,int start)
 {
     int c = oneLine[0];
-    int t;
-    if (isalpha(c))
-    {
-        t = data[oneLine];
-    }
-    else
-    {
-        t = c - '0';
-    }
+    int t=findVal(c);
     // cout<<"t="<<t<<endl;
     int i=start+1,count=0;
     while (true)
     {
         if(count<t){
-            string res = inspect(statements[i],0);
+            string res = inspect(statements[i],start);
             i++;
             if(res=="endfor"){
             count++;
@@ -53,7 +60,8 @@ void forloop(string oneLine,int start)
                 i=start+1;
             }
             else{
-                break;
+
+                return i;
             }
         }
         }
@@ -64,7 +72,7 @@ void forloop(string oneLine,int start)
     }
 }
 
-string inspect(string oneLine,int index)
+string inspect(string oneLine,int &index)
 {
     int space = oneLine.find(' ');
     if (space != -1)
@@ -77,11 +85,14 @@ string inspect(string oneLine,int index)
         }
         else if (word == "for")
         {
-            forloop(oneLine,index);
+            index = forloop(oneLine,index)-1;
         }
     }
     else if(oneLine=="endfor"){
         return "endfor";
+    }
+    else if(oneLine=="nl"){
+        cout<<endl;
     }
     return "";
 }
@@ -100,6 +111,7 @@ int main()
     for (int i = 0; i < statements.size(); i++)
     {
         oneLine = statements[i];
+        // cout<<"\noneLine = "<<i+1<<endl;
         inspect(oneLine,i);
     }
     MyReadFile.close();
