@@ -1,12 +1,13 @@
 int N nl
 for N
-int 23 nnl
+int A nnl
 endfor
 nl
-int M nl
-for M
-for M
-int J nnl
+int W nnl
+int H nl
+for H
+for W
+int X nnl
 endfor
 nl
 endfor

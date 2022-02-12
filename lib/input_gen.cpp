@@ -87,7 +87,9 @@ int forloop(string oneLine, int start)
 
 string inspect(string oneLine, int index)
 {
-
+    if(oneLine[0]=='#'){
+        return "";
+    }
     // cout << "*" << index + 1 << " " << oneLine << endl;
     int space = oneLine.find(' ');
     if (space != -1)
