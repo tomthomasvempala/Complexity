@@ -10,9 +10,9 @@ vector<string> statements;
 
 string inspect(string oneLine,int index);
 
-void integer(string &oneLine)
+void integer(string &oneLine,int mini=0,int maxi=5)
 {
-    int x = rand() % 20;
+    int x =mini+ rand() % (maxi-mini);
     cout << x;
     int space2 = oneLine.find(' ');
     string word2 = oneLine.substr(0, space2);
@@ -44,15 +44,21 @@ void forloop(string oneLine,int start)
     int i=start+1,count=0;
     while (true)
     {
-        string res = inspect(statements[i],0);
-        i++;
-        if(res=="endfor"){
+        if(count<t){
+            string res = inspect(statements[i],0);
+            i++;
+            if(res=="endfor"){
+            count++;
             if(count<t){
                 i=start+1;
-                count++;
+            }
+            else{
+                break;
             }
         }
-        else{
+        }
+        else
+        {
             break;
         }
     }
