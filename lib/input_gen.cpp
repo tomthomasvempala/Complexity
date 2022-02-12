@@ -67,7 +67,7 @@ int forloop(string oneLine, int start)
         if (res == "endfor")
         {
             count++;
-            cout<<"count = "<<count;
+            // cout<<"count = "<<count<<endl;
             if (count < t)
             {
                 i = start + 1;
@@ -75,9 +75,12 @@ int forloop(string oneLine, int start)
             else
             {
 
-                // cout<<"returning i="<<i<<endl;
+                // cout<<"returning i="<<i+1<<endl;
                 return i;
             }
+        }
+        else if(res.size()!=0){
+            i = stoi(res);
         }
     }
 }
@@ -85,7 +88,7 @@ int forloop(string oneLine, int start)
 string inspect(string oneLine, int index)
 {
 
-    cout << "*" << index + 1 << " " << oneLine << endl;
+    // cout << "*" << index + 1 << " " << oneLine << endl;
     int space = oneLine.find(' ');
     if (space != -1)
     {
