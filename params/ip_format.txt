@@ -1,9 +1,9 @@
-int N nl
-for N
-int X nnl
+for 2
+for 2
+int J nnl
 endfor
 nl
-int P nl
-for P
-int X nnl
 endfor
+
+
+

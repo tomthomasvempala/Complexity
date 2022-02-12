@@ -8,29 +8,41 @@ unordered_map<string, int> data;
 
 vector<string> statements;
 
-string inspect(string oneLine,int &index);
+string inspect(string oneLine, int index);
 
-int findVal(char c){
+int findVal(string c)
+{
     int t;
-    if (isalpha(c))
+    if (isalpha(c[0]))
     {
-        string ch ="";
-        ch+= c;
+        string ch = "";
+        ch += c[0];
         t = data[ch];
     }
     else
     {
-        t = c - '0';
+        t = stoi(c);
     }
     return t;
 }
 
-void integer(string &oneLine,int mini=1,int maxi=5)
+void integer(string &oneLine, int mini = 5, int maxi = 10)
 {
-    int x =mini+ rand() % (maxi-mini);
-    cout << x;
     int space2 = oneLine.find(' ');
+    int x;
     string word2 = oneLine.substr(0, space2);
+    if (!isalpha(word2[0]))
+    {
+
+        x = stoi(word2);
+        cout << x;
+    }
+    else
+    {
+        x = mini + rand() % (maxi - mini);
+        cout << x;
+    }
+
     oneLine = oneLine.substr(space2 + 1);
     data[word2] = x;
     if (oneLine == "nl")
@@ -43,37 +55,37 @@ void integer(string &oneLine,int mini=1,int maxi=5)
     }
 }
 
-int forloop(string oneLine,int start)
+int forloop(string oneLine, int start)
 {
-    int c = oneLine[0];
-    int t=findVal(c);
-    // cout<<"t="<<t<<endl;
-    int i=start+1,count=0;
+    int t = findVal(oneLine);
+    int i = start + 1, count = 0;
+    // cout<<"\nloopilkeri"<<t<<"\n";
     while (true)
     {
-        if(count<t){
-            string res = inspect(statements[i],start);
-            i++;
-            if(res=="endfor"){
+        string res = inspect(statements[i], i);
+        i++;
+        if (res == "endfor")
+        {
             count++;
-            if(count<t){
-                i=start+1;
+            cout<<"count = "<<count;
+            if (count < t)
+            {
+                i = start + 1;
             }
-            else{
+            else
+            {
 
+                // cout<<"returning i="<<i<<endl;
                 return i;
             }
-        }
-        }
-        else
-        {
-            break;
         }
     }
 }
 
-string inspect(string oneLine,int &index)
+string inspect(string oneLine, int index)
 {
+
+    cout << "*" << index + 1 << " " << oneLine << endl;
     int space = oneLine.find(' ');
     if (space != -1)
     {
@@ -85,14 +97,16 @@ string inspect(string oneLine,int &index)
         }
         else if (word == "for")
         {
-            index = forloop(oneLine,index)-1;
+            return to_string(forloop(oneLine, index));
         }
     }
-    else if(oneLine=="endfor"){
+    else if (oneLine == "endfor")
+    {
         return "endfor";
     }
-    else if(oneLine=="nl"){
-        cout<<endl;
+    else if (oneLine == "nl")
+    {
+        cout << endl;
     }
     return "";
 }
@@ -111,8 +125,11 @@ int main()
     for (int i = 0; i < statements.size(); i++)
     {
         oneLine = statements[i];
-        // cout<<"\noneLine = "<<i+1<<endl;
-        inspect(oneLine,i);
+        string ind = inspect(oneLine, i);
+        if (ind != "" && ind != "endfor")
+        {
+            i = stoi(ind) - 1;
+        }
     }
     MyReadFile.close();
 }
