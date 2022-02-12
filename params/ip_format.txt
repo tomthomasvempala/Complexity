@@ -1,5 +1,11 @@
-for 3
-for 3
+int N nl
+for N
+int 23 nnl
+endfor
+nl
+int M nl
+for M
+for M
 int J nnl
 endfor
 nl
