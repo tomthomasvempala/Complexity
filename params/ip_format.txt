@@ -1,16 +1,4 @@
-int N nl
-for N
+int VAR nl
+for VAR
 int A nnl
 endfor
-nl
-int W nnl
-int H nl
-for H
-for W
-int X nnl
-endfor
-nl
-endfor
-
-
-

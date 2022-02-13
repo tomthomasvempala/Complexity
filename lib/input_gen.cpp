@@ -5,6 +5,8 @@ ifstream MyReadFile("../params/ip_format.txt");
 ;
 
 unordered_map<string, int> data;
+int mini = 1, maxi = 100;
+int theVar;
 
 vector<string> statements;
 
@@ -15,9 +17,17 @@ int findVal(string c)
     int t;
     if (isalpha(c[0]))
     {
-        string ch = "";
-        ch += c[0];
-        t = data[ch];
+        if (c != "VAR")
+        {
+
+            string ch = "";
+            ch += c[0];
+            t = data[ch];
+        }
+        else
+        {
+            t = theVar;
+        }
     }
     else
     {
@@ -26,7 +36,7 @@ int findVal(string c)
     return t;
 }
 
-void integer(string &oneLine, int mini = 5, int maxi = 10)
+void integer(string &oneLine)
 {
     int space2 = oneLine.find(' ');
     int x;
@@ -39,8 +49,15 @@ void integer(string &oneLine, int mini = 5, int maxi = 10)
     }
     else
     {
-        x = mini + rand() % (maxi - mini);
-        cout << x;
+        if (word2 != "VAR")
+        {
+            x = mini + rand() % (maxi - mini);
+            cout << x;
+        }
+        else
+        {
+            cout << theVar;
+        }
     }
 
     oneLine = oneLine.substr(space2 + 1);
@@ -79,7 +96,8 @@ int forloop(string oneLine, int start)
                 return i;
             }
         }
-        else if(res.size()!=0){
+        else if (res.size() != 0)
+        {
             i = stoi(res);
         }
     }
@@ -87,7 +105,8 @@ int forloop(string oneLine, int start)
 
 string inspect(string oneLine, int index)
 {
-    if(oneLine[0]=='#'){
+    if (oneLine[0] == '#')
+    {
         return "";
     }
     // cout << "*" << index + 1 << " " << oneLine << endl;
@@ -116,10 +135,11 @@ string inspect(string oneLine, int index)
     return "";
 }
 
-int main()
+int main(int argc, char **argv)
 {
     freopen("../params/gen_inputs/ip.txt", "w", stdout);
-
+    // cout<<argv[1]<<endl;
+    theVar = stoi(argv[1]);
     string oneLine;
     srand(time(0));
     while (getline(MyReadFile, oneLine))
