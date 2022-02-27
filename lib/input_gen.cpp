@@ -137,7 +137,7 @@ string inspect(string oneLine, int index)
 
 int main(int argc, char **argv)
 {
-    freopen("../params/gen_inputs/ip.txt", "w", stdout);
+    freopen("gen_inputs/ip.txt", "w", stdout);
     // cout<<argv[1]<<endl;
     theVar = stoi(argv[1]);
     string oneLine;

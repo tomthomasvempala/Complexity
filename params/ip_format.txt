@@ -1,4 +1,4 @@
 int VAR nl
 for VAR
-int A nnl
+int X nnl
 endfor
