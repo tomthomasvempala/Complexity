@@ -1,2 +1,4 @@
-/params/gen_inputs/ip.txt
+/lib/gen_inputs/ip.txt
+/lib/output.txt
 /params//ip_format.txt
+/outputs/output.txt

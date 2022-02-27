@@ -15,7 +15,7 @@ int main()
 {
 
     freopen("gen_inputs/ip.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    freopen("../outputs/output.txt", "w", stdout);
 
     int n;
     cin >> n;
